@@ -1,8 +1,8 @@
-package com.coderman.PureJDBCExample.dao;
+package com.coderman.purejdbcexample.dao;
 
 
-import com.coderman.PureJDBCExample.domain.Person;
-import com.coderman.PureJDBCExample.exception.NoSuchPersonException;
+import com.coderman.purejdbcexample.domain.Person;
+import com.coderman.purejdbcexample.exception.NoSuchPersonException;
 
 import java.util.List;
 

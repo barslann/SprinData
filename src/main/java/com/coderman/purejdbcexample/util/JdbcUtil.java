@@ -1,4 +1,4 @@
-package com.coderman.PureJDBCExample.util;
+package com.coderman.purejdbcexample.util;
 
 
 import org.apache.commons.dbcp2.BasicDataSource;

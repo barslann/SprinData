@@ -1,4 +1,4 @@
-package com.coderman.springdata;
+package com.coderman.springjdbcexample;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

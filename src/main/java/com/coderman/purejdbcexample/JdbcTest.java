@@ -1,11 +1,9 @@
-package com.coderman.PureJDBCExample;
+package com.coderman.purejdbcexample;
 
-import com.coderman.PureJDBCExample.domain.Person;
-import com.coderman.PureJDBCExample.domain.PersonFactory;
-import com.coderman.PureJDBCExample.exception.NoSuchPersonException;
-import com.coderman.PureJDBCExample.dao.PersonDAOImpl;
-
-import java.util.Date;
+import com.coderman.purejdbcexample.domain.Person;
+import com.coderman.purejdbcexample.domain.PersonFactory;
+import com.coderman.purejdbcexample.exception.NoSuchPersonException;
+import com.coderman.purejdbcexample.dao.PersonDAOImpl;
 
 public class JdbcTest {
 	private static PersonDAOImpl dao = new PersonDAOImpl();

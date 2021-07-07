@@ -1,4 +1,4 @@
-package com.coderman.PureJDBCExample.domain;
+package com.coderman.purejdbcexample.domain;
 
 public interface Factory {
 	 Person createPerson();

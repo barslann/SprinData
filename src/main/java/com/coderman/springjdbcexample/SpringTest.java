@@ -1,21 +1,16 @@
-package org.javaturk.spring.data.ch02.jdbc.spring;
+package com.coderman.springjdbcexample;
 
-import java.util.Date;
-import java.util.List;
-
-import org.javaturk.spring.data.ch02.jdbc.common.data.PersonDAO;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.Factory;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.Person;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.PersonFactory;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.ex.NoSuchPersonException;
-import org.javaturk.spring.data.ch02.jdbc.spring.conf.AppConfig;
-import org.javaturk.spring.data.ch02.jdbc.spring.conf.JDBCConfig;
-import org.javaturk.spring.data.ch02.jdbc.spring.dao.PersonJdbcConnectionDAO;
-import org.javaturk.spring.data.ch02.jdbc.spring.dao.PersonJdbcDataSourceDAO;
+import com.coderman.purejdbcexample.dao.PersonDAO;
+import com.coderman.purejdbcexample.domain.Factory;
+import com.coderman.purejdbcexample.domain.Person;
+import com.coderman.springjdbcexample.conf.AppConfig;
+import com.coderman.springjdbcexample.conf.JDBCConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Import;
+
+import java.util.List;
 
 @Import({AppConfig.class, JDBCConfig.class})
 public class SpringTest {
@@ -42,7 +37,7 @@ public class SpringTest {
 	public void run() {
 		System.out.println("Number of person: " + dao.retrievePersonCount());
 		
-		int id = 1;
+//		int id = 1;
 //		Person person2 = new Person(id, "Ali", "Ozmen", new Date());
 //		dao.savePerson(person2);
 		
@@ -58,9 +53,9 @@ public class SpringTest {
 //		dao.deletePerson(personRetrieved);
 		
 //		savePersons(100);
-		List<Person> persons = dao.retrieveAllPersons();
-		for(Person person : persons)
-			System.out.println(person);
+//		List<Person> persons = dao.retrieveAllPersons();
+//		for(Person person : persons)
+//			System.out.println(person);
 		
 //		int id = 5;
 //		Person person = dao.retrievePerson(id);

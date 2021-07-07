@@ -1,10 +1,11 @@
-package org.javaturk.spring.data.ch02.jdbc.spring.conf;
+package com.coderman.springjdbcexample.conf;
 
-import org.javaturk.spring.data.ch02.jdbc.common.domain.Factory;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.Person;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.PersonFactory;
-import org.javaturk.spring.data.ch02.jdbc.spring.dao.PersonJdbcConnectionDAO;
-import org.javaturk.spring.data.ch02.jdbc.spring.dao.PersonJdbcDataSourceDAO;
+
+import com.coderman.purejdbcexample.domain.Factory;
+import com.coderman.purejdbcexample.domain.Person;
+import com.coderman.purejdbcexample.domain.PersonFactory;
+import com.coderman.springjdbcexample.dao.PersonJdbcConnectionDAO;
+import com.coderman.springjdbcexample.dao.PersonJdbcDataSourceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

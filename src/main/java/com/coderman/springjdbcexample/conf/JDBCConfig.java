@@ -1,11 +1,4 @@
-package org.javaturk.spring.data.ch02.jdbc.spring.conf;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
+package com.coderman.springjdbcexample.conf;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 @Configuration
-@PropertySource("org/javaturk/spring/data/ch02/jdbc/common/resources/jdbc.properties")
+@PropertySource("/Users/coderman/Desktop/SpringProjects/SpringData/src/main/java/com/coderman/purejdbcexample/resources/jdbc.properties")
 public class JDBCConfig {
 
 	@Value("${url}")

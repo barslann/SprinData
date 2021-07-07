@@ -1,5 +1,12 @@
-package org.javaturk.spring.data.ch02.jdbc.spring.dao;
+package com.coderman.springjdbcexample.dao;
 
+
+import com.coderman.purejdbcexample.dao.PersonDAO;
+import com.coderman.purejdbcexample.domain.Person;
+import com.coderman.purejdbcexample.exception.NoSuchPersonException;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,16 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.javaturk.spring.data.ch02.jdbc.common.data.PersonDAO;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.Person;
-import org.javaturk.spring.data.ch02.jdbc.common.domain.ex.NoSuchPersonException;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PersonJdbcDataSourceDAO implements PersonDAO {
 	private static final String SAVE_PERSON_QUERY = "INSERT INTO PERSONS VALUES(?,?,?,?)";
