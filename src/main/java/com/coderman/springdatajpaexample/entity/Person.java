@@ -1,13 +1,12 @@
-package com.coderman.springjdbcexample.entity;
+package com.coderman.springdatajpaexample.entity;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 
-
+@Entity
 public class Person {
 
     @Id
@@ -19,7 +18,6 @@ public class Person {
     private Date birthDate;
 
     public Person() {
-
     }
 
     public Person(int id, String name, String location, Date birthDate) {
