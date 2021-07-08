@@ -1,4 +1,4 @@
-package com.coderman.springjdbcexample;
+package com.coderman.purejdbcwithspringexample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

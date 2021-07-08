@@ -10,9 +10,9 @@ public class JdbcTest {
 	
 	public static void main(String[] args) throws NoSuchPersonException {
 
-		savePersons(5);
+//		savePersons(5);
 
-		System.out.println("Number of person: " + dao.retrievePersonCount());
+//		System.out.println("Number of person: " + dao.retrievePersonCount());
 //
 //		int id = 2;
 //		Person person2 = new Person(id, "Ali", "Ozmen", new Date());

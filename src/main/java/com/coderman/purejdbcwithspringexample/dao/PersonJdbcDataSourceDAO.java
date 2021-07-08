@@ -1,12 +1,12 @@
-package com.coderman.springjdbcexample.dao;
+package com.coderman.purejdbcwithspringexample.dao;
+
 
 import com.coderman.purejdbcexample.dao.PersonDAO;
 import com.coderman.purejdbcexample.domain.Person;
 import com.coderman.purejdbcexample.exception.NoSuchPersonException;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,22 +15,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PersonJdbcConnectionDAO implements PersonDAO, BeanFactoryAware {
+public class PersonJdbcDataSourceDAO implements PersonDAO {
 	private static final String SAVE_PERSON_QUERY = "INSERT INTO PERSONS VALUES(?,?,?,?)";
-	private static final String COUNT_QUERY = "SELECT COUNT(*) FROM PERSONS";
+	private static final String COUNT_QUERY = "SELECT COUNT(*) AS COUNT FROM PERSONS";
 	private static final String RETRIEVE_PERSON_QUERY = "SELECT * FROM PERSONS WHERE ID = ?";
 	private static final String RETRIEVE_ALL_PERSONS_QUERY = "SELECT * FROM PERSONS";
 	private static final String UPDATE_PERSONDOB_QUERY = "UPDATE PERSONS SET DATEOFBIRTH = ? WHERE ID = ?";
 	private static final String DELETE_PERSON_QUERY = "DELETE FROM PERSONS WHERE ID = ?";
 	private static final String DELETE_ALL_PERSONS_QUERY = "DELETE FROM PERSONS";
-
+	
 	// Don't do that. It needs to be refreshed every time a connection is needed
 	// because of the fact that
-	// connection object is closed after it is used.
+	// connection object is closed after it is used. So DataSource is injected instead.
 //	@Autowired
-//	private Connection conn;
-
-	private BeanFactory factory;
+//	private Connection connection;
+	
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
 	public void savePerson(Person person) {
@@ -55,6 +56,32 @@ public class PersonJdbcConnectionDAO implements PersonDAO, BeanFactoryAware {
 			returnConnection(conn);
 		}
 	}
+
+	@Override
+	public Person retrievePerson(int id) throws NoSuchPersonException {
+		System.out.println("\nRetrieving the person with id = " + id);
+		Person personRetrieved = null;
+		Connection conn = getConnection();
+		try {
+			PreparedStatement stmt = conn.prepareStatement(RETRIEVE_PERSON_QUERY);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
+				Date dob = rs.getDate("DATEOFBIRTH");
+				personRetrieved = new Person(id, firstName, lastName, dob);
+			}
+			if (personRetrieved == null)
+				throw new NoSuchPersonException(id);
+		} catch (SQLException e) {
+			System.out.println("Problem with statement: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			returnConnection(conn);
+		}
+		return personRetrieved;
+	}
 	
 	@Override
 	public int retrievePersonCount() {
@@ -74,33 +101,6 @@ public class PersonJdbcConnectionDAO implements PersonDAO, BeanFactoryAware {
 			returnConnection(conn);
 		}
 		return personCount;
-	}
-
-	@Override
-	public Person retrievePerson(int id) throws NoSuchPersonException {
-		System.out.println("\nRetrieving the person with id = " + id);
-		Person personRetrieved = null;
-		Connection conn = getConnection();
-		try {
-			PreparedStatement stmt = conn.prepareStatement(RETRIEVE_PERSON_QUERY);
-			stmt.setInt(1, id);
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				String firstName = rs.getString("FIRSTNAME");
-				String lastName = rs.getString("LASTNAME");
-				Date dob = rs.getDate("DATEOFBIRTH");
-				personRetrieved = new Person(id, firstName, lastName, dob);
-			}
-			if (personRetrieved == null)
-//				System.out.println("No such person with id = " + id);
-				throw new NoSuchPersonException(id);
-		} catch (SQLException e) {
-			System.out.println("Problem with statement: " + e.getMessage());
-			e.printStackTrace();
-		} finally {
-			returnConnection(conn);
-		}
-		return personRetrieved;
 	}
 
 	@Override
@@ -190,8 +190,13 @@ public class PersonJdbcConnectionDAO implements PersonDAO, BeanFactoryAware {
 	}
 
 	private Connection getConnection() {
-		Connection conn =  (Connection) factory.getBean("connection");
-		return conn;
+		Connection connection = null;
+		try {
+			connection = dataSource.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
 	}
 
 	private void returnConnection(Connection conn) {
@@ -201,10 +206,5 @@ public class PersonJdbcConnectionDAO implements PersonDAO, BeanFactoryAware {
 			System.out.println("Problem with closing the connection: " + e.getMessage());
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void setBeanFactory(BeanFactory factory) throws BeansException {
-		this.factory = factory;
 	}
 }

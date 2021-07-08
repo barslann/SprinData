@@ -1,16 +1,14 @@
-package com.coderman.springjdbcexample;
+package com.coderman.purejdbcwithspringexample;
 
 import com.coderman.purejdbcexample.dao.PersonDAO;
 import com.coderman.purejdbcexample.domain.Factory;
 import com.coderman.purejdbcexample.domain.Person;
-import com.coderman.springjdbcexample.conf.AppConfig;
-import com.coderman.springjdbcexample.conf.JDBCConfig;
+import com.coderman.purejdbcwithspringexample.conf.AppConfig;
+import com.coderman.purejdbcwithspringexample.conf.JDBCConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Import;
-
-import java.util.List;
 
 @Import({AppConfig.class, JDBCConfig.class})
 public class SpringTest {

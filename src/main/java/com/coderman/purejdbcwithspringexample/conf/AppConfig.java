@@ -1,11 +1,11 @@
-package com.coderman.springjdbcexample.conf;
+package com.coderman.purejdbcwithspringexample.conf;
 
 
 import com.coderman.purejdbcexample.domain.Factory;
 import com.coderman.purejdbcexample.domain.Person;
 import com.coderman.purejdbcexample.domain.PersonFactory;
-import com.coderman.springjdbcexample.dao.PersonJdbcConnectionDAO;
-import com.coderman.springjdbcexample.dao.PersonJdbcDataSourceDAO;
+import com.coderman.purejdbcwithspringexample.dao.PersonJdbcConnectionDAO;
+import com.coderman.purejdbcwithspringexample.dao.PersonJdbcDataSourceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
